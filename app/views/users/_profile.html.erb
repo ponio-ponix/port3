@@ -1,0 +1,81 @@
+<div class="shadow-lg p-3 mb-5 bg-white rounded">
+  <table class="users-profile">
+      <thead>
+        <tr>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><%= attachment_image_tag user, :profile_image, :fill, 200, 200, fallback: "no_image.jpg", size: '200x200' %></td>
+        </tr>
+      </tbody>
+  </table>
+  
+  <table class="users-profile">
+    <thead>
+      <tr>
+        <th>ユーザー名</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><%= user.name %></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  <table class="users-profile">
+    <thead>
+      <tr>
+        <th>お気に入り</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  <table class="users-profile">
+    <thead>
+      <tr>
+        <th>自己紹介</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><%= simple_format(user.introduction) %></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  <table class="users-profile">
+    <thead>
+      <tr>
+        <th>フォロー</th>
+        <th>フォロワー</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>a</td>
+        <td>a</td>
+      </tr>
+    </tbody>
+  </table>  
+</div>
+
+<table class="users-profile">
+  <tr>
+    <td><%= link_to "プロフィール編集＋使用タグ編集", edit_user_path %></td>
+  </tr>
+</table>
+
+<table class="users-profile rounded-circle">
+  <tr>
+    <td><%= link_to "new memo", new_memo_path %></td>
+  </tr>
+</table>
+

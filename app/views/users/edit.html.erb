@@ -1,0 +1,49 @@
+<h2>ユーザー情報編集画面</h2>
+
+
+<%= form_with model:@user, local:true do |f| %>
+
+<table>
+    <thead>
+      <tr>
+        <th>プロフィール写真</th>
+      </tr>
+      <tr>
+        <th><%= f.attachment_field :profile_image %></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><%= attachment_image_tag @user, :profile_image, :fill, 300, 300, fallback: "no_image.jpg", size: '300x300' %></td>
+      </tr>
+    </tbody>
+</table>
+
+<table>
+    <thead>
+      <tr>
+        <th>name</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><%= f.text_field :name, autofocus: true %></td>
+      </tr>
+    </tbody>
+</table>
+
+<table>
+    <thead>
+      <tr>
+        <th>introduction</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><%= f.text_area :introduction, autofocus: true, size: "50x20" %></td>
+      </tr>
+    </tbody>
+</table>
+
+<%= f.submit "編集内容保存", class:"btn btn-success sign_up" %>
+<% end %>
