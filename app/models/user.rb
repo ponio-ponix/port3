@@ -5,6 +5,8 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
   attachment :profile_image
   validates :name, presence: true, length: { in: 2..20 }
-  validates :introduction, length: { in: 2..100}
+  
   has_many :memos
+  has_many :comments
+  has_many :favorites
 end

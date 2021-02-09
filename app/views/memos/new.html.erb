@@ -1,3 +1,15 @@
+<table>
+    <thead>
+      <tr>
+        <th>このメモは以下の細分化です</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><%= @memo.parent_id %></td>
+      </tr>
+    </tbody>
+</table>
 
 <%= form_with model:@memo, local:true do |f| %>
 
@@ -22,23 +34,11 @@
     </thead>
     <tbody>
       <tr>
-        <td><%= f.text_area :body, autofocus: true %></td>
+        <td><%= f.text_area :body, size: "50x20" %></td>
       </tr>
     </tbody>
 </table>
 
-<table>
-    <thead>
-      <tr>
-        <th>introduction</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><%= f.text_area :introduction, autofocus: true, size: "50x20" %></td>
-      </tr>
-    </tbody>
-</table>
 
-<%= f.submit "編集内容保存", class:"btn btn-success sign_up" %>
+<%= f.submit "メモ投稿", class:"btn btn-success sign_up" %>
 <% end %>

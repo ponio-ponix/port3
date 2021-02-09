@@ -1,0 +1,70 @@
+<div class="container">
+  <div class="row">
+    <div class="col-lg-3">
+      <%= render 'users/profile', user:@user %>
+    </div>
+    <div class="col-lg-9 jumbotron">
+      <table class="memo-show-table display-5">
+          <thead>
+            <tr>
+              <th class="memo-show-th">メモタイトル</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><%= @memo.title %></td>
+            </tr>
+          </tbody>
+      </table>
+      
+      <hr class="my-4">
+      
+      <table class="memo-show-table">
+          <thead>
+            <tr>
+              <th class="memo-show-th">内容</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><%= simple_format(@memo.body) %></td>
+            </tr>
+          </tbody>
+      </table>
+      
+      <hr class="my-4">
+      
+      <table class="memo-show-table">
+        <thead>
+          <tr>
+            <th class="memo-show-th">カテゴリ</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><%#= f.text_area :introduction, size: "50x20" %></td>
+          </tr>
+        </tbody>
+      </table>
+      
+      <table class="buttons-coll">
+        <tr>
+          <td>
+            <!--btn--circle btn btn-warningから変更-->
+            <button class="custom-btn btn-7">
+              <span>
+                <%= link_to new_memo_path(memo_sort: 0), class: "text-warning" do %>
+                  <br>
+                  <div class="fas fa-plus-circle"></div>
+                  <div>new connect</div>
+                  <br>
+                <% end %>
+              </span>
+            </button>
+          </td>
+        </tr>
+      </table>
+    </div>
+  </div>  
+</div>
+

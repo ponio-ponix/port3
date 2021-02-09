@@ -1,4 +1,8 @@
 class UsersController < ApplicationController
+  
+  def index
+  end
+  
   def show
     @user = User.find(params[:id])
     
@@ -22,6 +26,18 @@ class UsersController < ApplicationController
       render "edit"
     end
     
+  end
+  
+  def quit
+  end
+  
+  def out
+  end
+  
+  def following
+  end
+  
+  def followers
   end
   
   private
