@@ -17,6 +17,8 @@ Rails.application.routes.draw do
     member do
       get :following
     end
+    resource :favorite, :only => [:create, :destroy]
+    resources :comments, :only => [:create, :destroy]
   end
 
 end

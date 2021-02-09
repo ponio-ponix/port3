@@ -1,0 +1,32 @@
+<h1>新着TOP</h1>
+<div class="container">
+  <div class="row">
+    <div class="col-lg-3">
+      <% if user_signed_in? %>
+        <%= render 'users/profile', user:@user %>
+        
+      <% else %>
+      <p>ログインしよう</p>
+      <% end %>
+    </div>
+    <div class="col-lg-9 jumbotron">
+      <%= @memos.each do |memo| %>
+        <div class="row">
+          <div class="col-sm-6">
+            <div class="card">
+              <div class="card-body">
+                <h5 class="card-title"><%= memo.title %></h5>
+                <p class="card-text"><%= memo.body %></p>
+                <div>
+                  <%= link_to "go detail", memo_path(memo.id), class: "btn btn-primary" %>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      <% end %>  
+    </div>
+  </div>  
+</div>
+
+
