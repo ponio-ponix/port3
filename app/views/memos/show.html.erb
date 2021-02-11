@@ -4,6 +4,22 @@
       <%= render 'users/profile', user:@user %>
     </div>
     <div class="col-lg-9 jumbotron">
+      <% if @memo.parent_id == @memo.id %>
+      <h2>このメモは一番新規です</h2>
+      <% else %>
+      <table>
+        <thead>
+          <tr>
+            <th>このメモは以下の細分化です</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><%= @memo_parent.title %></td>
+          </tr>
+        </tbody>
+      </table>
+      <% end %>
       <table class="memo-show-table display-5">
           <thead>
             <tr>
