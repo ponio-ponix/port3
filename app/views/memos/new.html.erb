@@ -1,3 +1,6 @@
+<% if @back_memo == nil %>
+  <h2>このメモは一番新規です</h2>
+<% else %>
 <table>
     <thead>
       <tr>
@@ -6,10 +9,11 @@
     </thead>
     <tbody>
       <tr>
-        <td><%= @memo.parent_id %></td>
+        <td><%= @back_memo.title %></td>
       </tr>
     </tbody>
 </table>
+<% end %>
 
 <%= form_with model:@memo, local:true do |f| %>
 

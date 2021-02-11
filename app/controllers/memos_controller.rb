@@ -1,12 +1,14 @@
 class MemosController < ApplicationController
   
-  def index
+  def memo_relation
+    @memo = Memo.find(params[:id])
+    @memo2 = Memo.find(@memo[:parent_id])
   end
   
   def show
     @memo = Memo.find(params[:id])
     @user = @memo.user
-
+    @memo_parent = Memo.find(@memo[:parent_id])
   end
   
   def edit
@@ -14,36 +16,25 @@ class MemosController < ApplicationController
   
   def new
     @memo = Memo.new
+    @path = Rails.application.routes.recognize_path(request.referer)
     case params[:memo_sort]
     when "0"
-      @memo.parent_id = Memo.find(params[:id])
+       @back_memo = Memo.find(@path[:id])
+       @memo.parent_id = @back_memo.id
+    when "1"
+      @back_memo = nil
     end  
-        
-    #@path = Rails.application.routes.recognize_path(request.referer)
-    
-    #if 
-      
-    # @path[:controller] == "memos" && @path[:action] == "index"
-    # @memo.parent_id = @path.Memo.find(params[:id])
-    
-    #if @path[:controller] == "memos" && @path[:action] == "show"
-    #@memo.parent_id = Memo.where(id: @path[:id])
-    #  binding.pry
-    
-    #end
-  
   end
   
   def create
     @memo = Memo.new(memo_params)
     @memo.user_id = current_user.id
-    if @memo.save && @memo.parent_id = nil
+    if @memo.save && @memo.parent_id == nil
       @memo.parent_id = @memo.id
       @memo.save
-      redirect_to memo_path(@memo.parent_id)
-    else
-      @memo.save
-      redirect_to memo_path(@memo.parent_id)
+      redirect_to memo_path(@memo.id)
+    else @memo.save
+      redirect_to memo_path(@memo.id)
     end
   end
   
