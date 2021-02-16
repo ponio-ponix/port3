@@ -10,7 +10,7 @@
       <table>
         <thead>
           <tr>
-            <th>このメモは以下の細分化です</th>
+            <th>このメモは以下の子要素です</th>
           </tr>
         </thead>
         <tbody>
@@ -69,12 +69,16 @@
             <!--btn--circle btn btn-warningから変更-->
             <button class="custom-btn btn-7">
               <span>
+                <%#= link_to edit_memo_path(@memo_new.id), class: "text-warning" do %>
                 <%= link_to new_memo_path(memo_sort: 0), class: "text-warning" do %>
                   <br>
                   <div class="fas fa-plus-circle"></div>
                   <div>new connect</div>
                   <br>
                 <% end %>
+                <%#= form_with model:@memo_new, local:true do |f| %>
+                <%#= f.submit "new connect" %>
+                <%# end %>
               </span>
             </button>
           </td>
