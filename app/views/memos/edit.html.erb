@@ -1,0 +1,62 @@
+<h1>edit</h1>
+<% if @memo.parent_id == @memo.id %>
+  <h2>このメモは一番新規です</h2>
+<% else %>
+<table>
+    <thead>
+      <tr>
+        <th>このメモは以下の細分化です</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><%= @memo_parent.title %></td>
+      </tr>
+    </tbody>
+</table>
+<% end %>
+
+<%= form_with model:@memo, local:true do |f| %>
+
+<table>
+    <thead>
+      <tr>
+        <th>タイトルを入力</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><%= f.text_field :title, autofocus: true %></td>
+      </tr>
+    </tbody>
+</table>
+
+<table>
+    <thead>
+      <tr>
+        <th>内容を入力</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><%= f.text_area :body, size: "50x20" %></td>
+      </tr>
+    </tbody>
+</table>
+
+<table>
+    <thead>
+      <tr>
+        <th>内容を入力</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><%= f.text_area :parent_id, size: "50x20" %></td>
+      </tr>
+    </tbody>
+</table>
+
+
+<%= f.submit "メモ投稿", class:"btn btn-success sign_up" %>
+<% end %>
