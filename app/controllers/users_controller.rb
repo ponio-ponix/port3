@@ -12,6 +12,12 @@ class UsersController < ApplicationController
   
   def edit
     @user = User.find(params[:id])
+    if @user.id != current_user.id
+      flash[:notice] = "ログインユーザーのものではありません"
+    redirect_to root_path
+    end
+    @categories = @user.categories 
+    @category = Category.new
     
   end
   
@@ -19,7 +25,7 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     if @user.id != current_user.id
       flash[:notice] = "ログインユーザーのものではない"
-      redirect to user_path(@user.id)
+      redirect_to user_path(@user.id)
     end
     if @user.update(user_params)
       flash[:notice] = "successfully"

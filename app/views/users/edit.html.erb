@@ -14,7 +14,7 @@
     </thead>
     <tbody>
       <tr>
-        <td><%= attachment_image_tag @user, :profile_image, :fill, 300, 300, fallback: "no_image.jpg", size: '300x300' %></td>
+        <td><%= attachment_image_tag @user, :profile_image, :fill, 200, 200, fallback: "no_image.jpg", size: '200×200' %></td>
       </tr>
     </tbody>
 </table>
@@ -40,10 +40,45 @@
     </thead>
     <tbody>
       <tr>
-        <td><%= f.text_area :introduction, autofocus: true, size: "50x20" %></td>
+        <td><%= f.text_area :introduction, size: "50x20" %></td>
       </tr>
     </tbody>
 </table>
 
 <%= f.submit "編集内容保存", class:"btn btn-success sign_up" %>
 <% end %>
+
+<br>
+
+<%= form_with(url: user_categories_path(current_user), method: :post, model:@category, local:true) do |f| %>
+  <div>
+    <%= f.label "カテゴリー入力欄" %>
+    <%= f.text_field :category_name, placeholder: "新しいカテゴリーを入力" %>
+    <%= f.submit "追加", class: "btn btn-info btn-md" %>
+  </div>
+<% end %>
+
+<table>
+  <thead>
+    <tr>
+      <th>
+        登録したカテゴリー
+      </th>
+      <th>
+      </th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @categories.each do |category| %>
+      <tr>
+        <td>
+          <%= category.category_name %>
+        </td>
+        <td>
+          <%#= link_to "" %>
+        </td>
+      </tr>
+    <% end %>  
+  </tbody>
+</table>
+
