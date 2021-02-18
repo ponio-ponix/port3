@@ -10,12 +10,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_02_16_173410) do
+ActiveRecord::Schema.define(version: 2021_02_18_084016) do
 
   create_table "categories", force: :cascade do |t|
     t.string "category_name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "user_id"
+    t.boolean "is_active"
   end
 
   create_table "comments", force: :cascade do |t|

@@ -10,5 +10,5 @@ class Memo < ApplicationRecord
     favorites.where(user_id: user.id).exists?
   end
   
-  has_many :categorys
+  belongs_to :category
 end

@@ -11,6 +11,7 @@ Rails.application.routes.draw do
       get :following, :followers
       get :quit
     end
+    resources :categories, :only => [:create, :destroy, :index, :edit]
   end
     
     #followingはログインユーザーのフォローしている人のメモを新着順、mypageはログインユーザーのメモ新着順
@@ -30,4 +31,5 @@ Rails.application.routes.draw do
 
   end
     resources :relationships, :only => [:create, :destroy]
+  
 end
