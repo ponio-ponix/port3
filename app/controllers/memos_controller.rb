@@ -14,10 +14,12 @@ class MemosController < ApplicationController
        @repete_boxs2 = Memo.where(parent_id: repete_box.id)
      end
        @repete_boxs = @repete_boxs2
-    # @repete_boxs2.each do |repete_box2|
-    #   @repete_boxs3 = Memo.where(id: repete_box2.parent_id)
-    # end
-     
+   
+    @memo.each do |memo|
+      @repete_boxs = Memo.where(parent_id: memo.id)
+    end
+
+
 
     #   @memos.each do |memos|
         
@@ -59,6 +61,7 @@ class MemosController < ApplicationController
     @user = @memo.user
     @memo_parent = Memo.find(@memo[:parent_id])
     #もしshowでcreateをしてしまうなら@memo_new = Memo.new(parent_id: @memo.id, user_id: current_user.id)
+    @comment = Comment.new
   end
   
   def edit

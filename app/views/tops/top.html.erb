@@ -10,9 +10,13 @@
       <% end %>
     </div>
     <div class="col-lg-9 jumbotron">
+      <div>
+        <%= @memo1.title %>
+        <%= @memo1.body %>
+      </div>
       <%= @memos.each do |memo| %>
-        <div class="row">
-          <div class="col-sm-6">
+        <!--<div class="row">-->
+        <!--  <div class="col-sm-6">-->
             <div class="card">
               <div class="card-body">
                 <h5 class="card-title"><%= memo.title %></h5>
@@ -25,8 +29,8 @@
                 </div>
               </div>
             </div>
-          </div>
-        </div>
+        <!--  </div>-->
+        <!--</div>-->
       <% end %>  
     </div>
   </div>  

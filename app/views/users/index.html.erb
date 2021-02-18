@@ -1,0 +1,60 @@
+
+<div class="index-background">
+    <table class="text-center table center-index">
+      <thead>
+        <tr>
+          <th class="text-center">顔写真</th>
+          <th class="text-center">ユーザー名</th>
+          <th class="text-center">稼働中/退会済み</th>
+          <th class="text-center">ユーザーページへ</th>
+          <th class="text-center">フォロー</th>
+        </tr>
+      </thead>
+
+
+        <% @users.each do |user| %>
+          <% if user.is_deleted == "Invaild" %>
+          <% else %>
+            <tbody>
+              <tr>
+                <td>
+                  <%= link_to user_path(user) do %>
+                  <%= attachment_image_tag user, :profile_image, fallback: "no_image.jpg", size: "50x50" %>
+                  <% end %>
+                </td>
+                <td><%= user.name %></td>
+                <td>
+                  <% if user.is_deleted == "Availble" %>
+                  <%= "稼働中" %>
+                    <% else %>
+                  <%= "退会済み" %>
+                  <% end %>
+                </td>
+                <td class="btn btn-default"><%= link_to "詳細", user_path(user) %></td>
+                <td>
+                  <% unless user_signed_in? && current_user.id == user.id %>
+                    <div id="follow_form">
+                      <% if current_user.following?(user) %>
+                        <%= form_with(model: current_user.active_relationships.find_by(followed_id: user.id),
+                         html: { method: :delete }, local: true) do |f| %>
+                        <%= f.submit "フォロー中！", class: "btn" %>
+                        <% end %>
+                      <% else %>
+                        <%= form_with(model: current_user.active_relationships.build, local: true) do |f| %>
+                        <div>
+                          <%= hidden_field_tag :followed_id, user.id %>
+                        </div>
+                        <%= f.submit "フォローする", class: "btn btn-info" %>
+                        <% end %>
+                      <% end %>
+                    </div>
+                  <% else %>
+                  <% end %>
+                </td>
+              </tr>
+            </tbody>
+          <% end %>
+        <% end %>
+  　</table>
+</div>
+
