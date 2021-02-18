@@ -26,13 +26,13 @@
                 <h4 style="color: blue; margin-top: 15px;">ようこそ<%= current_user.name %>さん</h4>
               </li>
               <li class="nav-item active">
-                <%= link_to "マイページ", mypage_memo_path(current_user), class: "nav-link" %>
+                <%= link_to "MYページ", mypage_memo_path(current_user), class: "nav-link" %>
               </li>
               <li class="nav-item">
                 <%= link_to "会員一覧", users_path, class: "nav-link" %>
               </li>
               <li class="nav-item active">
-                <%= link_to "フォローリストメモ一覧", following_memo_path(current_user), class: "nav-link" %>
+                <%= link_to "MYフォローリストメモ", following_memo_path(current_user), class: "nav-link" %>
               </li>
               <li class="nav-item active">
                 <%= link_to "お気に入り", favorite_memos_path, class: "nav-link" %>

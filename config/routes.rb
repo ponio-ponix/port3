@@ -25,9 +25,9 @@ Rails.application.routes.draw do
       get :memo_relation
     end
     
-    resources :favorite, :only => [:create, :destroy] 
-   
+    resource :favorites, :only => [:create, :destroy]
     resources :comments, :only => [:create, :destroy]
+
   end
-    #favoriteのindexはお気に入りのメモ一覧
+    resources :relationships, :only => [:create, :destroy]
 end
