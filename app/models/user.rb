@@ -31,4 +31,17 @@ class User < ApplicationRecord
   has_many :comments, dependent: :destroy
   has_many :favorites, dependent: :destroy
   has_many :categories, dependent: :destroy
+  
+  def self.guest
+    find_or_create_by!(email: 'guest@example.com', name: 'guest') do |user|
+      user.password = SecureRandom.urlsafe_base64
+      # user.confirmed_at = Time.now  # Confirmable を使用している場合は必要
+    end
+  end
+  
+  enum is_deleted: { Availble: false, Invaild: true }
+  
+  def after_sign_in_path_for(resource)
+    user_path(resource)
+  end
 end

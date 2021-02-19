@@ -1,6 +1,6 @@
 class Memo < ApplicationRecord
   
-  validates :title, presence: true, length: { in: 2..30 }
+  validates :title, presence: true, length: { in: 3..30 }
   
   belongs_to :user
   has_many :comments, dependent: :destroy

@@ -1,65 +1,18 @@
 class MemosController < ApplicationController
   before_action :authenticate_user!
+  before_action :set_q, only: [:index, :search]
   
-  def memo_relation
-    @memo = Memo.find(params[:id])
-    @memo2 = Memo.find(@memo[:parent_id])#例え
-   
-   
-    @memos = Memo.all
-    
-    #@repete_boxsが一回目に探したものすべてを表す変数。erbでは<%= repeteboxs.title %>などで使えばよい
-     @repete_boxs = Memo.where(parent_id: @memo.id)
-     @repete_boxs.each do |repete_box|
-       @repete_boxs2 = Memo.where(parent_id: repete_box.id)
-     end
-       @repete_boxs = @repete_boxs2
-   
-    @memo.each do |memo|
-      @repete_boxs = Memo.where(parent_id: memo.id)
-    end
-
-
-
-    #   @memos.each do |memos|
-        
-    #     @repeat_boxs do |repeate_boxs|
-    #       @repeat_boxs2 = Memo.where(id: )
-          
-    #   end
-    # breke if Memo.where() 
-    # end
-    
-    # loop do
-    # @repete_boxs = @memos.where("@memos.id = ?", @memo[:parent_id]
-    # @memo = @repete_boxs
-    # break if memo.where(memo.id: memo[:parent_id]) == nil
-    # end
-    
-    
-    
-    
-    # @memos.each do |memo|
-    #   @memo_repeat = Memo.where(memo.parents_id: params[:id])
-      
-    # end
-    
-    
-    
-    # @memos.each do |memo|
-    #   memo.where(memo.id: memo[:parent_id])
-    #   break if memo.where(memo.id: memo[:parent_id]) == nil
-    # end
-  
-    
-
-
+  def index
+    @user = User.find(params[:id])
   end
   
   def show
     @memo = Memo.find(params[:id])
     @user = @memo.user
-    @memo_parent = Memo.find(@memo[:parent_id])
+    if @memo.parent_id == nil
+    else
+      @memo_parent = Memo.find(@memo[:parent_id])
+    end
     #もしshowでcreateをしてしまうなら@memo_new = Memo.new(parent_id: @memo.id, user_id: current_user.id)
     @comment = Comment.new
   end
@@ -86,7 +39,12 @@ class MemosController < ApplicationController
     @memo = Memo.new(memo_params)
     @memo.user_id = current_user.id
     @memo.save
+    if @memo.category_id == nil
+      flash[:notice] = "カテゴリーを選択してください"
+      render :new
+    else
     redirect_to memo_path(@memo.id)
+    end
   end
   
   def update
@@ -102,9 +60,12 @@ class MemosController < ApplicationController
   
   def following
   end
+ 
   
   private
+
+  
   def memo_params
-    params.require(:memo).permit(:title, :body, :user_id, :parent_id)
+    params.require(:memo).permit(:title, :body, :user_id, :parent_id, :category_id)
   end
 end

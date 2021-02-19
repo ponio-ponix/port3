@@ -35,7 +35,7 @@
                 <%= link_to "MYフォローリストメモ", following_memo_path(current_user), class: "nav-link" %>
               </li>
               <li class="nav-item active">
-                <%= link_to "お気に入り", favorite_memos_path, class: "nav-link" %>
+                <%= link_to "お気に入り", favorite_user_path(current_user), class: "nav-link" %>
               </li>
               <li class="nav-item">
                 <%= link_to "ログアウト", destroy_user_session_path, method: :delete, class: "nav-link" %>
@@ -53,15 +53,11 @@
                 <%= link_to "sign_in", new_user_registration_path, class: "nav-link" %>
               </li>
               <li class="nav-item">
-                <%#= link_to 'ゲストログイン（閲覧用）', users_guest_sign_in_path, method: :post, class: "nav-link" %>
+                <%= link_to 'ゲストログイン（閲覧用）', users_guest_sign_in_path, method: :post, class: "nav-link" %>
               </li>
             </ul>
         <% end %>
       </div>
-      <form class="form-inline my-2 my-lg-0">
-        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-      </form>
     </header>
     <div class="body">
       <%= yield %>

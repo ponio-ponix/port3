@@ -1,4 +1,3 @@
-<h1>新着TOP</h1>
 <div class="container">
   <div class="row">
     <div class="col-lg-3">
@@ -10,18 +9,7 @@
       <% end %>
     </div>
     <div class="col-lg-9 jumbotron">
-      <div class="shadow-lg p-3 mb-5 bg-white rounded">
-        <%= search_form_for @q, url: search_tops_path, class: "d-flex align-items-center justify-content-center" do |f| %> 
-          <%= f.label :body, 'メモ内容' %>
-          <%= f.search_field :body_cont, class: "search-btn" %>
-          
-          <%= f.label :category_name, 'カテゴリー' %>
-          <%= f.search_field :category_category_name_cont %>
-          
-          <%= f.submit '検索' %>
-          <% end %>
-      </div>
-      <div>
+          <div>
         <% if @memo1 == nil %>
         <% else %>
           <%= @memo1.title %>
