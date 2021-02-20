@@ -4,7 +4,7 @@
       <%= render 'users/profile', user:@user %>
     </div>
     <div class="col-lg-9 jumbotron">
-      <% if @memo.parent_id == @memo.id %>
+      <% if @memo.parent_id == nil %>
       <h2>このメモは一番新規です</h2>
       <% else %>
       <table>
@@ -59,12 +59,12 @@
       <table class="memo-show-table">
         <thead>
           <tr>
-            <th class="memo-show-th">カテゴリ</th>
+            <th class="memo-show-th">カテゴリー</th>
           </tr>
         </thead>
         <tbody>
           <tr>
-            <td><%#= f.text_area :introduction, size: "50x20" %></td>
+            <td><%= @memo.category.category_name %></td>
           </tr>
         </tbody>
       </table>

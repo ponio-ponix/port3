@@ -1,0 +1,40 @@
+<div class="container">
+  <div class="row">
+    <div class="col-lg-3">
+      <% if user_signed_in? %>
+        <%= render 'users/profile', user:@user %>
+        
+      <% else %>
+      <p>ログインしよう</p>
+      <% end %>
+    </div>
+    <div class="col-lg-9 jumbotron">
+      <div>
+        <% if @memos == nil %>
+        <p>メモはまだありません</p>
+        <% else %>
+          <%= @users.each do |user| %>
+            <!--<div class="row">-->
+            <!--  <div class="col-sm-6">-->
+                <div class="card">
+                  <div class="card-body">
+                    <h5 class="card-title"><%= user.following.name %></h5>
+                    <p class="card-text"><%= user.following.body %></p>
+                    <div class="d-inline p-2 bg-primary text-white">
+                      <%#= link_to "go detail", memo_path(memo.id), class: "btn btn-primary" %>
+                    </div>
+                    <div class="d-inline p-2 bg-dark text-white">
+                      <%#= link_to "go 相関図", memo_relation_memo_path(memo.id) %>
+                    </div>
+                  </div>
+                </div>
+            <!--  </div>-->
+            <!--</div>-->
+          <% end %>
+        <% end %>  
+      </div>
+    </div>
+  </div>  
+</div>
+
+

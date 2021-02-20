@@ -1,6 +1,5 @@
 <h2>ユーザー情報編集画面</h2>
 
-
 <%= form_with model:@user, local:true do |f| %>
 
 <table>
@@ -48,6 +47,10 @@
 <%= f.submit "編集内容保存", class:"btn btn-success sign_up" %>
 <% end %>
 
+<br>
+<div align="right">
+	<%= link_to "退会画面へ", quit_user_path(@user), class: "btn btn-danger", method: :get %>
+</div>
 <br>
 
 <%= form_with(url: user_categories_path(current_user), method: :post, model:@category, local:true) do |f| %>

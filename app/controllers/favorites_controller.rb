@@ -1,6 +1,10 @@
 class FavoritesController < ApplicationController
   
   def index
+    @user = User.find(params[:id])
+    @favorites = @user.favorites
+    @memos = @favorites.memos
+    
   end
   
   def create

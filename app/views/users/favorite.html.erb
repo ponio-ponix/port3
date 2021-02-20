@@ -1,0 +1,38 @@
+<div class="index-background">
+    <table class="text-center table center-index">
+      <thead>
+        <tr>
+          <th class="text-center">顔写真</th>
+          <th class="text-center">ユーザー名</th>
+          <th class="text-center">メモタイトル</th>
+          <th class="text-center">内容</th>
+        </tr>
+      </thead>
+
+
+        <% @favorites.each do |favorite| %>
+          <% if favorite.user.is_deleted == "Invaild" %>
+          <% else %>
+            <tbody>
+              <tr>
+                <td>
+                  <%= link_to user_path(favorite.user) do %>
+                  <%= attachment_image_tag favorite.memo.user, :profile_image, fallback: "no_image.jpg", size: "50x50" %>
+                  <% end %>
+                </td>
+                <td>
+                  <%= favorite.memo.user.name %>
+                </td>
+                <td>
+                  <%= favorite.memo.title %>
+                </td>
+                <td>
+                  <%= favorite.memo.body %>
+                </td>
+              </tr>
+            </tbody>
+          <% end %>
+        <% end %>
+  　</table>
+</div>
+
