@@ -17,11 +17,11 @@
               <tr>
                 <td>
                   <%= link_to user_path(favorite.user) do %>
-                  <%= attachment_image_tag favorite.user, :profile_image, fallback: "no_image.jpg", size: "50x50" %>
+                  <%= attachment_image_tag favorite.memo.user, :profile_image, fallback: "no_image.jpg", size: "50x50" %>
                   <% end %>
                 </td>
                 <td>
-                  <%= favorite.user.name %>
+                  <%= favorite.memo.user.name %>
                 </td>
                 <td>
                   <%= favorite.memo.title %>

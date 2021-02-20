@@ -4,6 +4,7 @@ class MemosController < ApplicationController
   
   def index
     @user = User.find(params[:id])
+    @memos = Memo.find(@user[:id])
   end
   
   def show
@@ -59,6 +60,8 @@ class MemosController < ApplicationController
   end
   
   def following
+    @user = User.find(params[:id])
+    @users = current_user.following
   end
  
   

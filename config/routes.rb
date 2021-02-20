@@ -30,14 +30,13 @@ Rails.application.routes.draw do
     
     #followingはログインユーザーのフォローしている人のメモを新着順、mypageはログインユーザーのメモ新着順
     #indexは1つのリレーションメモ
-  resources :memos, :only => [:edit, :show, :update, :new, :create, :destroy] do
+  resources :memos, :only => [:index, :edit, :show, :update, :new, :create, :destroy] do
     collection do
       # get :favorite
     end
     member do
       get :following
       get :mypage
-      get :memo_relation
     end
     
     resource :favorites, :only => [:create, :destroy]

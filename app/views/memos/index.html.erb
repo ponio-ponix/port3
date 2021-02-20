@@ -9,16 +9,9 @@
       <% end %>
     </div>
     <div class="col-lg-9 jumbotron">
-          <div>
-        <% if @memo1 == nil %>
-        <% else %>
-          <%= @memo1.title %>
-          <%= @memo1.body %>
-        <% end %>  
-      </div>
       <div>
         <% if @memos == nil %>
-        <p>メモを投稿しよう</p>
+        <p>メモはまだありません</p>
         <% else %>
           <%= @memos.each do |memo| %>
             <!--<div class="row">-->
