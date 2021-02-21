@@ -49,71 +49,30 @@
   <hr class="my-4">
   <hr class="my-4">
   
-  <table class="users-profile">
-    <thead>
-      <tr>
-        <th>ユーザー名</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><%= user.name %></td>
-      </tr>
-    </tbody>
-  </table>
+  <div class="card">
+    <div class="card-body">
+      <div class="center"><b>ユーザー名</b></div>
+      <h5 class="card-title center"><%= user.name %></h5>
+      <hr class="my-4">
+      <div class="text-justify">
+        <div class="center"><b>自己紹介</b></div>
+        <div class="center"><%= simple_format(user.introduction) %></div>
+      </div>
+      <hr class="my-4">
+      <div>
+        <div class="center">
+          <%= link_to "follow", following_user_path(user), class: "btn btn-outline-primary" %>
+          <%= user.following.count %>
+        </div>
+        <hr class="my-4">
+        <div class="center">
+          <%= link_to "follower", followers_user_path(user), class: "btn btn-outline-primary" %>
+          <%= user.followers.count %>
+        </div>
+      </div>
+    </div>
+  </div>
   
-  <hr class="my-4">
-  
-  <table class="users-profile">
-    <thead>
-      <tr>
-        <th>お気に入り</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  
-  <hr class="my-4">
-  
-  <table class="users-profile">
-    <thead>
-      <tr>
-        <th>自己紹介</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><%= simple_format(user.introduction) %></td>
-      </tr>
-    </tbody>
-  </table>
-  
-  <hr class="my-4">
-  
-  <table class="users-profile">
-    <thead>
-      <tr>
-        <th></th>
-        <th></th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>
-          <%= link_to "フォロー", following_user_path(user) %>
-		      <%= user.following.count %>
-		    </td>
-        <td>
-          <%= link_to "フォロワー", followers_user_path(user) %>
-	        <%= user.followers.count %>
-	      </td>
-      </tr>
-    </tbody>
-  </table>  
 </div>
 
 <div>

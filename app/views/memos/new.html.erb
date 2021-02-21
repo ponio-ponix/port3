@@ -1,3 +1,4 @@
+<div class="jumbotron">
 <% if flash[:notice] %>
   <div class="flash alert alert-danger">
     <%= flash[:notice] %>
@@ -60,7 +61,7 @@
     <tbody>
       <tr>
         <td>
-          <%= f.collection_select(:category_id, Category.where(id: current_user.id), :id, :category_name, {prompt: "選択してください"}) %>
+          <%= f.collection_select(:category_id, Category.where(user_id: current_user.id), :id, :category_name, {prompt: "選択してください"}) %>
         </td>
       </tr>
       <tr>
@@ -88,3 +89,4 @@
 
 <%= f.submit "メモ投稿", class:"btn btn-success sign_up" %>
 <% end %>
+</div>
