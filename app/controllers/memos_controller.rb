@@ -44,7 +44,7 @@ class MemosController < ApplicationController
       flash[:notice] = "カテゴリーを選択してください"
       render :new
     else
-    redirect_to memo_path(@memo.id)
+      redirect_to memo_path(@memo.id)
     end
   end
   
