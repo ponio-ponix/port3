@@ -1,0 +1,16 @@
+<% if flash[:notice] %>
+  <div class="flash alert alert-danger">
+    <%= flash[:notice] %>
+  </div>
+<% end %>
+<div>
+    <%= form_with model:@category, url: user_category_path(@category), method: :patch, local:true do |f| %>
+        <%= f.label "ジャンル" %>
+        <%= f.text_field :category_name %>
+        <%= f.radio_button :is_active, :Availble %>
+        <%= f.label "有効" %>
+        <%= f.radio_button :is_active, :Invalid %>
+        <%= f.label "無効" %>
+        <%= f.submit "変更を保存する", class: "btn btn-info" %>
+    <% end %>
+</div>

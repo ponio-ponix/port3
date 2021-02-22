@@ -1,0 +1,52 @@
+
+<div class="container">
+  <% if flash[:notice] %>
+    <div class="flash alert alert-danger">
+      <%= flash[:notice] %>
+    </div>
+  <% end %>
+  <div class="row">
+    <div class="col-lg-3">
+      <% if user_signed_in? %>
+        <%= render 'users/profile', user:@user %>
+      <% else %>
+      <p>ログインしよう</p>
+      <% end %>
+    </div>
+    <div class="col-lg-9 jumbotron">
+      <div>
+        <% if @favorites == nil %>
+        <p>お気に入りはまだありません</p>
+        <% else %>
+          <% @favorites.each do |favorite| %>
+            <% if favorite.user.is_deleted == "Invaild" %>
+            <% else %>
+              <div class="card">
+                <h5 class="card-header">タイトル：<%= favorite.memo.title %></h5>
+                <div class="card-body">
+                  <h5 class="card-title">ユーザー名：<%= favorite.memo.user.name %></h5>
+                  <p class="card-text">メモ内容：<%= favorite.memo.body %></p>
+                  <div class=" d-flex justify-content-end">
+                    <div>
+                      <br>
+                      <div>コメント数:<%= favorite.memo.comments.count %>_</div>
+                    </div>
+                    <div>
+                      <br>
+                      <div id="favorites_buttons_<%= favorite.memo.id %>">
+                        <%= render "favorites/favorite", memo: favorite.memo %>
+                      </div>
+                    </div>
+                    <div class="d-inline p-2 text-white" >
+                      <%= link_to "go detail", memo_path(favorite.memo.id), class: "btn btn-primary btn-lg" %>
+                    </div>
+                  </div>  
+                </div>
+              </div>
+            <% end %>
+          <% end %>
+        <% end %>  
+      </div>
+    </div>
+  </div>  
+</div>

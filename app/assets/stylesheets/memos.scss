@@ -1,3 +1,115 @@
 // Place all the styles related to the Memos controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.memo-show-table{
+  margin: 10px auto; 
+}
+
+.center{
+  text-align:center;
+}
+
+.memo-show-comment{
+  text-align:center;
+}
+// *,
+// *:before,
+// *:after {
+//   -webkit-box-sizing: inherit;
+//   box-sizing: inherit;
+// }
+
+// html {
+//   -webkit-box-sizing: border-box;
+//   box-sizing: border-box;
+//   font-size: 62.5%;/*rem算出をしやすくするために*/
+// }
+
+// .btn,
+// a.btn,
+// button.btn {
+//   font-size: 1.6rem;
+//   font-weight: 700;
+//   line-height: 1.5;
+//   position: relative;
+//   display: inline-block;
+//   padding: 1rem 4rem;
+//   cursor: pointer;
+//   -webkit-user-select: none;
+//   -moz-user-select: none;
+//   -ms-user-select: none;
+//   user-select: none;
+//   -webkit-transition: all 0.3s;
+//   transition: all 0.3s;
+//   text-align: center;
+//   vertical-align: middle;
+//   text-decoration: none;
+//   letter-spacing: 0.1em;
+//   color: #212529;
+//   border-radius: 0.5rem;
+// }
+
+// a.btn--circle {
+//   border-radius: 50%;
+//   line-height: 15px;
+//   width: 100px;
+//   height: 100px;
+//   padding: 0;
+//   -webkit-box-shadow: 0 5px 0 #e6b400;
+//   box-shadow: 0 5px 0 #e6b400;
+// }
+
+// a.btn--circle:hover {
+//   -webkit-transform: translate(0, 3px);
+//   transform: translate(0, 3px);
+//   -webkit-box-shadow: 0 2px 0 #e6b400;
+//   box-shadow: 0 2px 0 #e6b400;
+// }
+
+.buttons-coll {
+  width: 90%;
+  margin: 50px auto;
+  text-align: center;
+}
+button {
+  margin: 20px;
+}
+.custom-btn {
+  padding: 10px 25px;
+  font-family: "Roboto", sans-serif;
+  font-weight: 500;
+  background: transparent;
+  outline: none !important;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  display: inline-block;
+}
+
+.btn-7 {
+  border: 2px solid #000;
+  transition: all 0.3s ease;
+  background: #f2f2f2;
+}
+.btn-7:before {
+  position: absolute;
+  content: " ";
+  z-index: 0;
+  width: 25%;
+  top: 50%;
+  left: -15%;
+  height: 2px;
+  background: #000;
+  transition: all 0.3s ease;
+}
+.btn-7:hover {
+  background: #000;
+  color: #fff;
+  border-color: #000;
+  padding-left: 30px;
+  padding-right: 20px;
+}
+.btn-7:hover:before {
+  left: -10%;
+}

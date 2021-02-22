@@ -4,7 +4,9 @@
     <title>Port3</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-
+    
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <script src="https://kit.fontawesome.com/fde22234ab.js" crossorigin="anonymous"></script>
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
@@ -25,10 +27,16 @@
                 <h4 style="color: blue; margin-top: 15px;">ようこそ<%= current_user.name %>さん</h4>
               </li>
               <li class="nav-item active">
-                <%= link_to "投稿する", new_memo_path, class: "nav-link" %>
+                <%= link_to "MYページ", user_path(current_user.id), class: "nav-link" %>
               </li>
               <li class="nav-item">
                 <%= link_to "会員一覧", users_path, class: "nav-link" %>
+              </li>
+              <li class="nav-item active">
+                <%= link_to "MYフォローリストメモ", following_memo_path(current_user), class: "nav-link" %>
+              </li>
+              <li class="nav-item active">
+                <%= link_to "お気に入り", favorite_user_path(current_user), class: "nav-link" %>
               </li>
               <li class="nav-item">
                 <%= link_to "ログアウト", destroy_user_session_path, method: :delete, class: "nav-link" %>
@@ -37,24 +45,17 @@
         <% else %>
             <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
               <li class="nav-item active">
-                <%#= link_to "about", new_user_registration_path, class: "nav-link" %>
-              </li>
-              <li class="nav-item active">
                 <%= link_to "login", new_user_session_path, class: "nav-link" %>
               </li>
               <li class="nav-item">
                 <%= link_to "sign_in", new_user_registration_path, class: "nav-link" %>
               </li>
               <li class="nav-item">
-                <%#= link_to 'ゲストログイン（閲覧用）', users_guest_sign_in_path, method: :post, class: "nav-link" %>
+                <%= link_to 'ゲストログイン（閲覧用）', users_guest_sign_in_path, method: :post, class: "nav-link" %>
               </li>
             </ul>
         <% end %>
       </div>
-      <form class="form-inline my-2 my-lg-0">
-        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-      </form>
     </header>
     <div class="body">
       <%= yield %>

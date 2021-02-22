@@ -1,49 +1,110 @@
-<h2>ユーザー情報編集画面</h2>
+<div class="container">
+  <% if flash[:notice] %>
+    <div class="flash alert alert-danger">
+      <%= flash[:notice] %>
+    </div>
+  <% end %>
+  <div class="row">
+    <div class="jumbotron col-lg-12">
+      <h2 class="center">user edit page</h2>
 
+      <%= form_with model:@user, local:true do |f| %>
+      
+      <table class="memo-show-table">
+          <thead class="memo-show-table">
+            <tr>
+              <th class="center">プロフィール写真</th>
+            </tr>
+            <tr>
+              <th><%= f.attachment_field :profile_image %></th>
+            </tr>
+          </thead>
+          <tbody class="memo-show-table">
+            <tr class="">
+              <td class="center">
+                <%= attachment_image_tag @user, :profile_image, :fill, 100, 100, fallback: "no_image.jpg", size: '100×100', class: "center" %>
+              </td>
+            </tr>
+          </tbody>
+      </table>
+      
+      <table class="memo-show-table">
+          <thead class="memo-show-table">
+            <tr>
+              <th class="center">ユーザー名</th>
+            </tr>
+          </thead>
+          <tbody class="memo-show-table">
+            <tr>
+              <td><%= f.text_field :name, autofocus: true %></td>
+            </tr>
+          </tbody>
+      </table>
+      
+      <table wrap="hard" cols="30" class="memo-show-table">
+          <thead class="memo-show-table">
+            <tr wrap="hard" cols="30">
+              <th wrap="hard" cols="30" class="center">自己紹介</th>
+            </tr>
+          </thead>
+          <tbody class="memo-show-table">
+            <tr>
+              <td><%= f.text_area :introduction, size: "50x20", class: "form_control" %></td>
+            </tr>
+          </tbody>
+      </table>
+      <div class="center">
+        <%= f.submit "編集内容保存", class:"btn btn-success sign_up col-6 col-md-4" %>
+      </div>
+      <% end %>
 
-<%= form_with model:@user, local:true do |f| %>
+      <br>
+      <div align="right">
+      	<%= link_to "退会画面へ", quit_user_path(@user), class: "btn btn-danger", method: :get %>
+      </div>
+      <br>
 
-<table>
-    <thead>
-      <tr>
-        <th>プロフィール写真</th>
-      </tr>
-      <tr>
-        <th><%= f.attachment_field :profile_image %></th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><%= attachment_image_tag @user, :profile_image, :fill, 300, 300, fallback: "no_image.jpg", size: '300x300' %></td>
-      </tr>
-    </tbody>
-</table>
+      <%= form_with(url: user_categories_path(current_user), method: :post, model:@category, local:true) do |f| %>
+        <div class="center">
+          <%= f.label "カテゴリー入力欄" %>
+          <%= f.text_field :category_name, placeholder: "新しいカテゴリーを入力" %>
+          <%= f.radio_button :is_active, :Availble %>
+          <%= f.label "有効" %>
+          <%= f.radio_button :is_active, :Invalid %>
+          <%= f.label "無効" %>
+          <%= f.submit "追加", class: "btn btn-info btn-md" %>
+        </div>
+      <% end %>
 
-<table>
-    <thead>
-      <tr>
-        <th>name</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><%= f.text_field :name, autofocus: true %></td>
-      </tr>
-    </tbody>
-</table>
+      <table class="memo-show-table col-md-offset-1">
+        <thead>
+          <tr>
+            <th>登録したカテゴリー</th>
+            <th></th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody class="center">
+          <% @categories.each do |category| %>
+            <tr>
+              <td class="center">
+                <%= category.category_name %>
+              </td>
+              <td width="100">
+                <% if category.is_active == "Availble" %>
+                <%= "有効" %>
+                <% else %>
+                <%= "無効" %>
+                <% end %>
+              </td>
+              <td class="center">
+                <%= link_to "編集する", edit_user_category_path(@user.id, category.id), class: "btn btn-info btn-md" %>
+              </td>
+            </tr>
+          <% end %>  
+        </tbody>
+      </table>]
+    </div>
+  </div>
+</div>
 
-<table>
-    <thead>
-      <tr>
-        <th>introduction</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><%= f.text_area :introduction, autofocus: true, size: "50x20" %></td>
-      </tr>
-    </tbody>
-</table>
-
-<%= f.submit "編集内容保存", class:"btn btn-success sign_up" %>
-<% end %>

@@ -7,75 +7,84 @@
       </thead>
       <tbody>
         <tr>
-          <td><%= attachment_image_tag user, :profile_image, :fill, 200, 200, fallback: "no_image.jpg", size: '200x200' %></td>
+          <td>
+            <%= attachment_image_tag user, :profile_image, :fill, 100, 100, fallback: "no_image.jpg", size: '100x100' %>
+          </td>
         </tr>
       </tbody>
   </table>
   
   <table class="users-profile">
-    <thead>
-      <tr>
-        <th>ユーザー名</th>
-      </tr>
-    </thead>
+    <thead></thead>
     <tbody>
       <tr>
-        <td><%= user.name %></td>
+        <td>
+          <div>
+            <% unless user_signed_in? && current_user.id == user.id %>
+              <div id="follow_form">
+                <% if current_user.following?(user) %>
+                  <%= form_with(model: current_user.active_relationships.find_by(followed_id: user.id),
+                  html: { method: :delete }, local: true) do |f| %>
+                  <%= f.submit "フォロー中！", class: "btn" %>
+                  <% end %>
+                <% else %>
+                  <%= form_with(model: current_user.active_relationships.build, class: "like_form") do |f| %>
+                  <div>
+                    <%= hidden_field_tag :followed_id, user.id %>
+                  </div>
+                  <%= f.submit "フォローする", class: "btn btn-info" %>
+                  <% end %>
+                <% end %>
+              </div>
+            <% else %>
+            <% end %>
+          </div>
+        </td>
+        <td>
+          <% if user.id == current_user.id %>
+            <%= link_to "", edit_user_path(current_user), class: "far fa-file-alt btn btn-secondary" %>
+          <% else %>
+          <% end %>
+        </td>
       </tr>
     </tbody>
   </table>
+  <hr class="my-4">
+  <hr class="my-4">
   
-  <table class="users-profile">
-    <thead>
-      <tr>
-        <th>お気に入り</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
+  <div class="card">
+    <div class="card-body">
+      <div class="center"><b>ユーザー名</b></div>
+      <h5 class="card-title center"><%= user.name %></h5>
+      <hr class="my-4">
+      <div class="text-justify">
+        <div class="center"><b>自己紹介</b></div>
+        <div class="center"><%= simple_format(user.introduction) %></div>
+      </div>
+      <hr class="my-4">
+      <div>
+        <div class="center">
+          <%= link_to "follow", following_user_path(user), class: "btn btn-outline-primary" %>
+          <%= user.following.count %>
+        </div>
+        <hr class="my-4">
+        <div class="center">
+          <%= link_to "follower", followers_user_path(user), class: "btn btn-outline-primary" %>
+          <%= user.followers.count %>
+        </div>
+      </div>
+    </div>
+  </div>
   
-  <table class="users-profile">
-    <thead>
-      <tr>
-        <th>自己紹介</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><%= simple_format(user.introduction) %></td>
-      </tr>
-    </tbody>
-  </table>
-  
-  <table class="users-profile">
-    <thead>
-      <tr>
-        <th>フォロー</th>
-        <th>フォロワー</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>a</td>
-        <td>a</td>
-      </tr>
-    </tbody>
-  </table>  
 </div>
 
-<table class="users-profile">
-  <tr>
-    <td><%= link_to "プロフィール編集＋使用タグ編集", edit_user_path %></td>
-  </tr>
-</table>
-
-<table class="users-profile rounded-circle">
-  <tr>
-    <td><%= link_to "new memo", new_memo_path %></td>
-  </tr>
-</table>
+<div>
+  <table class="users-profile">
+    <tr>
+      <td>
+        <%= link_to "new memo", new_memo_path(memo_sort: 1), class: "fas fa-edit btn btn-primary float-right btn-lg" %>
+      </td>
+    </tr>
+  </table>
+</div>
 
