@@ -17,7 +17,7 @@ ActiveRecord::Schema.define(version: 2021_02_18_084016) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "user_id"
-    t.boolean "is_active"
+    t.boolean "is_active", default: true
   end
 
   create_table "comments", force: :cascade do |t|

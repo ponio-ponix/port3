@@ -1,17 +1,13 @@
 <% if memo.favorited_by?(current_user) %>
-	<li>
 		<%= link_to memo_favorites_path(memo), method: :delete, remote: true do %>
 			<i class="fa fa-heart" aria-hidden="true" style="color: red;">
 			</i>
-		<%= memo.favorites.count %>いいね解除
+		<%= memo.favorites.count %>
 		<% end %>
-	</li>
 <% else %>
-	<li>
 		<%= link_to memo_favorites_path(memo), method: :post, remote: true do %>
 		<i class="fa fa-heart-o" aria-hidden="true">
 		</i>
-			<%= memo.favorites.count %>いいね
+			<%= memo.favorites.count %>
 		<% end %>
-	</li>
 <% end %>

@@ -62,6 +62,7 @@ class MemosController < ApplicationController
   def following
     @user = User.find(params[:id])
     @users = current_user.following
+    @memos = Memo.where(id: @users.ids).order(id: "DESC") 
   end
  
   

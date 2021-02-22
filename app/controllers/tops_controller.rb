@@ -1,8 +1,6 @@
 class TopsController < ApplicationController
   def top
-    #@user = User.find(params[:id])
-    @memo1 = Memo.last
-    @memos = Memo.all
+    @memos = Memo.all.order(id: "DESC") 
     @user = current_user
   end
 end

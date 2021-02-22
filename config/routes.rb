@@ -25,7 +25,7 @@ Rails.application.routes.draw do
       get :quit
       get :favorite
     end
-    resources :categories, :only => [:create, :destroy, :index, :edit]
+    resources :categories, :only => [:create, :destroy, :update, :edit]
   end
     
     #followingはログインユーザーのフォローしている人のメモを新着順、mypageはログインユーザーのメモ新着順

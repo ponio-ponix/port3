@@ -17,7 +17,7 @@ class UsersController < ApplicationController
       flash[:notice] = "ログインユーザーのものではありません"
     redirect_to root_path
     end
-    @categories = @user.categories 
+    @categories = @user.categories
     @category = Category.new
     
   end

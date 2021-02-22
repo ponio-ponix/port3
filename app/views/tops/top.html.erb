@@ -10,47 +10,53 @@
       <% end %>
     </div>
     <div class="col-lg-9 jumbotron">
+      
       <div class="shadow-lg p-3 mb-5 bg-white rounded">
-        <%= search_form_for @q, url: search_tops_path, class: "d-flex align-items-center justify-content-center" do |f| %> 
+        <%= search_form_for @q, url: search_tops_path, class: "form-inline" do |f| %> 
           <%= f.label :body, 'メモ内容' %>
-          <%= f.search_field :body_cont, class: "search-btn" %>
+          <%= f.search_field :body_cont, class: "form-control" %>
           
           <%= f.label :category_name, 'カテゴリー' %>
-          <%= f.search_field :category_category_name_cont %>
-          
-          <%= f.submit '検索' %>
+          <%= f.search_field :category_category_name_cont, class: "form-control" %>
+          <div class="">
+            <i class="fas fa-search">
+              <%= f.submit '検索' %>
+            </i>
+          </div>
           <% end %>
       </div>
-      <div>
-        <% if @memo1 == nil %>
-        <% else %>
-          <%= @memo1.title %>
-          <%= @memo1.body %>
-        <% end %>  
-      </div>
+      
+      
       <div>
         <% if @memos == nil %>
         <p>メモを投稿しよう</p>
         <% else %>
-          <%= @memos.each do |memo| %>
-            <!--<div class="row">-->
-            <!--  <div class="col-sm-6">-->
-                <div class="card">
-                  <div class="card-body">
-                    <h5 class="card-title"><%= memo.title %></h5>
-                    <p class="card-text"><%= memo.body %></p>
-                    <div class="d-inline p-2 bg-primary text-white">
-                      <%= link_to "go detail", memo_path(memo.id), class: "btn btn-primary" %>
+          <% @memos.each do |memo| %>
+            <div class="card">
+              <h5 class="card-header">タイトル：<%= memo.title %></h5>
+              <div class="card-body">
+                <h5 class="card-title">カテゴリ名：<%= memo.category.category_name %></h5>
+                <p class="card-text">メモ内容：<%= memo.body %></p>
+                <div class=" d-flex justify-content-end">
+                  <div>
+                    <br>
+                    <div>コメント数:<%= memo.comments.count %>_</div>
+                  </div>
+                  <div>
+                    <br>
+                    <div id="favorites_buttons_<%= memo.id %>">
+                      <%= render "favorites/favorite", memo: memo %>
                     </div>
                   </div>
+                  <div class="d-inline p-2 text-white" >
+                    <%= link_to "go detail", memo_path(memo.id), class: "btn btn-primary btn-lg" %>
+                  </div>
                 </div>
-            <!--  </div>-->
-            <!--</div>-->
+              </div>
+            </div>
           <% end %>
         <% end %>  
       </div>
     </div>
   </div>  
 </div>
-
-
