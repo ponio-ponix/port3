@@ -1,4 +1,9 @@
 <div class="container">
+  <% if flash[:notice] %>
+    <div class="flash alert alert-danger">
+      <%= flash[:notice] %>
+    </div>
+  <% end %>
   <div class="row">
     <div class="col-lg-3">
       <%= render 'users/profile', user:@user %>
@@ -6,33 +11,47 @@
     <div class="col-lg-9 jumbotron">
       <div class="card">
         <div class="card-body">
-          <div class="card-title center d-flex justify-content-center">
+          <div class="card-title center">
             <div>
-              <div class="">タイトル</div>
+              <div class="card-header">タイトル</div>
               <div><%= @memo.title %></div> 
+            </div>
+          </div>
+          <br>
+          <div class="center">
+            <div class="card-header">メモ内容</div>
+            <div class="card-text center"><%= @memo.body %></div>
+          </div>
+          <br>
+          <div class="text-justify">
+            <div class="center card-header">カテゴリー</div>
+            <div class="center">
+              <%= @memo.category.category_name %>
+            </div>
+          </div>
+          <div class="buttons-coll d-flex justify-content-center">
+            <div>
+              <%= link_to new_memo_path(memo_sort: 0), class: "text-warning custom-btn btn-7" do %>
+                <br>
+                <div class="fas fa-plus-circle"></div>
+                <div>new connect</div>
+                <br>
+              <% end %>
             </div>
             <div id="favorites_buttons_<%= @memo.id %>">
               <%= render "favorites/favorite", memo: @memo %>
             </div>
           </div>
-          
-          <div class="center">
-            <div>メモ内容</div>
-            <p class="card-text center"><%= @memo.body %></p>
-          </div>
-          <div class="text-justify">
-            <div class="center">カテゴリー</div>
+          <div class="cemter">
             <div class="center">
-              <%= @memo.category.category_name %>
+              <% if @memo_parent == nil %>
+              <div>元メモはありません</div>
+              <% else %>
+                <%= link_to memo_path(@memo_parent.id), class: "btn btn-info" do %>
+                元メモタイトル：<%= @memo_parent.title %>
+                <% end %>
+              <% end %>
             </div>
-          </div>
-          <div class="buttons-coll">
-            <%= link_to new_memo_path(memo_sort: 0), class: "text-warning custom-btn btn-7" do %>
-              <br>
-              <div class="fas fa-plus-circle"></div>
-              <div>new connect</div>
-              <br>
-            <% end %>
           </div>
         </div>
       </div>

@@ -1,4 +1,8 @@
-
+<% if flash[:notice] %>
+  <div class="flash alert alert-danger">
+    <%= flash[:notice] %>
+  </div>
+<% end %>
 <div class="index-background">
     <table class="text-center table center-index">
       <thead>

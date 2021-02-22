@@ -1,4 +1,5 @@
 class CategoriesController < ApplicationController
+  before_action :authenticate_user!
   
   def create
     @category = Category.new(category_params)
@@ -12,8 +13,6 @@ class CategoriesController < ApplicationController
     end
   end
   
-  def destroy
-  end
   
   def update
     @category = Category.find(params[:id])

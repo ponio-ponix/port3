@@ -1,38 +1,52 @@
-<div class="index-background">
-    <table class="text-center table center-index">
-      <thead>
-        <tr>
-          <th class="text-center">顔写真</th>
-          <th class="text-center">ユーザー名</th>
-          <th class="text-center">メモタイトル</th>
-          <th class="text-center">内容</th>
-        </tr>
-      </thead>
 
-
-        <% @favorites.each do |favorite| %>
-          <% if favorite.user.is_deleted == "Invaild" %>
-          <% else %>
-            <tbody>
-              <tr>
-                <td>
-                  <%= link_to user_path(favorite.user) do %>
-                  <%= attachment_image_tag favorite.memo.user, :profile_image, fallback: "no_image.jpg", size: "50x50" %>
-                  <% end %>
-                </td>
-                <td>
-                  <%= favorite.memo.user.name %>
-                </td>
-                <td>
-                  <%= favorite.memo.title %>
-                </td>
-                <td>
-                  <%= favorite.memo.body %>
-                </td>
-              </tr>
-            </tbody>
+<div class="container">
+  <% if flash[:notice] %>
+    <div class="flash alert alert-danger">
+      <%= flash[:notice] %>
+    </div>
+  <% end %>
+  <div class="row">
+    <div class="col-lg-3">
+      <% if user_signed_in? %>
+        <%= render 'users/profile', user:@user %>
+      <% else %>
+      <p>ログインしよう</p>
+      <% end %>
+    </div>
+    <div class="col-lg-9 jumbotron">
+      <div>
+        <% if @favorites == nil %>
+        <p>お気に入りはまだありません</p>
+        <% else %>
+          <% @favorites.each do |favorite| %>
+            <% if favorite.user.is_deleted == "Invaild" %>
+            <% else %>
+              <div class="card">
+                <h5 class="card-header">タイトル：<%= favorite.memo.title %></h5>
+                <div class="card-body">
+                  <h5 class="card-title">ユーザー名：<%= favorite.memo.user.name %></h5>
+                  <p class="card-text">メモ内容：<%= favorite.memo.body %></p>
+                  <div class=" d-flex justify-content-end">
+                    <div>
+                      <br>
+                      <div>コメント数:<%= favorite.memo.comments.count %>_</div>
+                    </div>
+                    <div>
+                      <br>
+                      <div id="favorites_buttons_<%= favorite.memo.id %>">
+                        <%= render "favorites/favorite", memo: favorite.memo %>
+                      </div>
+                    </div>
+                    <div class="d-inline p-2 text-white" >
+                      <%= link_to "go detail", memo_path(favorite.memo.id), class: "btn btn-primary btn-lg" %>
+                    </div>
+                  </div>  
+                </div>
+              </div>
+            <% end %>
           <% end %>
-        <% end %>
-  　</table>
+        <% end %>  
+      </div>
+    </div>
+  </div>  
 </div>
-
