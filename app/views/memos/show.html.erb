@@ -6,11 +6,25 @@
     <div class="col-lg-9 jumbotron">
       <div class="card">
         <div class="card-body">
-          <h5 class="card-title center"><%= @memo.title %></h5>
-          <p class="card-text center"><%= simple_format(@memo.body) %></p>
+          <div class="card-title center d-flex justify-content-center">
+            <div>
+              <div class="">タイトル</div>
+              <div><%= @memo.title %></div> 
+            </div>
+            <div id="favorites_buttons_<%= @memo.id %>">
+              <%= render "favorites/favorite", memo: @memo %>
+            </div>
+          </div>
+          
+          <div class="center">
+            <div>メモ内容</div>
+            <p class="card-text center"><%= @memo.body %></p>
+          </div>
           <div class="text-justify">
             <div class="center">カテゴリー</div>
-            <div class="center"><%= @memo.category.category_name %></div>
+            <div class="center">
+              <%= @memo.category.category_name %>
+            </div>
           </div>
           <div class="buttons-coll">
             <%= link_to new_memo_path(memo_sort: 0), class: "text-warning custom-btn btn-7" do %>

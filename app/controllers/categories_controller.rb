@@ -15,13 +15,23 @@ class CategoriesController < ApplicationController
   def destroy
   end
   
-  def index
+  def update
+    @category = Category.find(params[:id])
+    binding.pry
+    if @category.update(category_params)
+      redirect_to root_path
+      flash[:notice] = "ジャンル編集しました"
+    else
+      render :edit
+    end
+    
   end
   
   def edit
+    @category = Category.find(params[:id])
   end
   
   def category_params
-    params.require(:category).permit(:category_name)
+    params.require(:category).permit(:category_name, :is_active)
   end
 end
