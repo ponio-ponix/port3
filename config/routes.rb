@@ -2,7 +2,8 @@ Rails.application.routes.draw do
   
   root 'tops#top'
   devise_for :users, controllers: {
-    registrations: 'users/registrations'
+    registrations: 'users/registrations',
+    sessions: 'users/sessions'
   }
   
   devise_scope :user do
@@ -28,12 +29,7 @@ Rails.application.routes.draw do
     resources :categories, :only => [:create, :destroy, :update, :edit]
   end
     
-    #followingはログインユーザーのフォローしている人のメモを新着順、mypageはログインユーザーのメモ新着順
-    #indexは1つのリレーションメモ
-  resources :memos, :only => [:index, :edit, :show, :update, :new, :create, :destroy] do
-    collection do
-      # get :favorite
-    end
+  resources :memos, :only => [:index, :show, :new, :create] do
     member do
       get :following
       get :mypage
@@ -41,11 +37,8 @@ Rails.application.routes.draw do
     
     resource :favorites, :only => [:create, :destroy]
     resources :comments, :only => [:create, :destroy]
-
   end
   
   resources :relationships, :only => [:create, :destroy]
-    
-  
 
 end

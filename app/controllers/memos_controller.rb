@@ -18,11 +18,6 @@ class MemosController < ApplicationController
     @comment = Comment.new
   end
   
-  def edit
-    @memo = Memo.find(params[:id])
-    @memo_parent = Memo.find(@memo[:parent_id])
-  end
-  
   def new
     @memo = Memo.new
     @path = Rails.application.routes.recognize_path(request.referer)
@@ -48,27 +43,13 @@ class MemosController < ApplicationController
     end
   end
   
-  def update
-    @memo = Memo.find(params[:id])
-    if @memo.user_id != current_user.id
-      flash[:notice] = "ログインユーザーのものではありません"
-      redirect_to root_path
-    end
-  end
-  
-  def destroy
-  end
-  
   def following
     @user = User.find(params[:id])
     @users = current_user.following
     @memos = Memo.where(id: @users.ids).order(id: "DESC") 
   end
- 
   
   private
-
-  
   def memo_params
     params.require(:memo).permit(:title, :body, :user_id, :parent_id, :category_id)
   end
