@@ -5,7 +5,7 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
   attachment :profile_image
   validates :name, presence: true, length: { in: 2..20 }
-  validates :introduction, presence: true, length: { in: 0..30 }
+  validates :introduction, {presence: true, length: {maximum: 30}}
   
   has_many :active_relationships, class_name: "Relationship",
                                   foreign_key: "follower_id",
