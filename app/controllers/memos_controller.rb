@@ -20,6 +20,7 @@ class MemosController < ApplicationController
   
   def new
     @memo = Memo.new
+    @category = Category.where(user_id: current_user.id, is_active: true)
     @path = Rails.application.routes.recognize_path(request.referer)
     case params[:memo_sort]
     when "0"
