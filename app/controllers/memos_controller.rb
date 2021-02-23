@@ -20,7 +20,6 @@ class MemosController < ApplicationController
   
   def new
     @memo = Memo.new
-    @category = Category.where(user_id: current_user.id, is_active: true)
     @path = Rails.application.routes.recognize_path(request.referer)
     case params[:memo_sort]
     when "0"
@@ -35,13 +34,17 @@ class MemosController < ApplicationController
   def create
     @memo = Memo.new(memo_params)
     @memo.user_id = current_user.id
-    @memo.save
     if @memo.category_id == nil
       flash[:notice] = "カテゴリーを選択してください"
-      render :new
-    else
-      redirect_to memo_path(@memo.id)
+      render :new and return
     end
+    if @memo.save
+      flash[:notice] = "投稿しました"
+      redirect_to memo_path(@memo.id)
+    else
+      render :new
+      flash[:notice] = "投稿に誤りがあります"
+    end  
   end
   
   def following

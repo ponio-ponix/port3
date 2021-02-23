@@ -1,4 +1,4 @@
-
+<%= render 'layouts/error_messages', model: @memo, model: @user %>
 <% if user_signed_in? %>
   <div class="container">
     <% if flash[:notice] %>
@@ -67,9 +67,9 @@
         
         <h1>新着TOP</h1>
         <div class="center">
-        <%= link_to new_user_session_path, class: "btn btn-primary" do %>
-        <p>ログインしよう</p>
-        <% end %>
+          <%= link_to new_user_session_path, class: "btn btn-primary" do %>
+            <p>ログインしよう</p>
+          <% end %>
         </div>
         <Br>
         

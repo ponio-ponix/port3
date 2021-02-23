@@ -1,0 +1,16 @@
+ja:
+  activerecord:
+    models:
+      user: ユーザー
+      memo: memo
+      comment: コメント
+    attributes:
+      user:
+        name: ユーザー名
+        introduction: 自己紹介
+      memo:
+        title: タイトル
+        body: メモ内容
+        category_id: カテゴリー
+      comment:
+        comment: コメント

@@ -1,4 +1,5 @@
 <div class="container">
+  <%= render 'layouts/error_messages', model: @user %>
   <% if flash[:notice] %>
     <div class="flash alert alert-danger">
       <%= flash[:notice] %>
@@ -64,46 +65,54 @@
       </div>
       <br>
 
-      <%= form_with(url: user_categories_path(current_user), method: :post, model:@category, local:true) do |f| %>
-        <div class="center">
-          <%= f.label "カテゴリー入力欄" %>
-          <%= f.text_field :category_name, placeholder: "新しいカテゴリーを入力" %>
-          <%= f.radio_button :is_active, :Availble %>
-          <%= f.label "有効" %>
-          <%= f.radio_button :is_active, :Invalid %>
-          <%= f.label "無効" %>
-          <%= f.submit "追加", class: "btn btn-info btn-md" %>
-        </div>
-      <% end %>
-
-      <table class="memo-show-table col-md-offset-1">
-        <thead>
-          <tr>
-            <th>登録したカテゴリー</th>
-            <th></th>
-            <th></th>
-          </tr>
-        </thead>
-        <tbody class="center">
-          <% @categories.each do |category| %>
+      <div class="center">
+        <%= link_to "new memo", new_memo_path(memo_sort: 1), class: "fas fa-edit btn btn-primary float-right btn-lg" %>
+      </div>  
+      <br>
+      <br>
+      <br>
+      <div>
+        <%= form_with(url: user_categories_path(current_user), method: :post, model:@category, local:true) do |f| %>
+          <div class="center">
+            <%= f.label "カテゴリー入力欄" %>
+            <%= f.text_field :category_name, placeholder: "新しいカテゴリーを入力" %>
+            <%= f.radio_button :is_active, :Availble %>
+            <%= f.label "有効" %>
+            <%= f.radio_button :is_active, :Invalid %>
+            <%= f.label "無効" %>
+            <%= f.submit "追加", class: "btn btn-info btn-md" %>
+          </div>
+        <% end %>
+  
+        <table class="memo-show-table col-md-offset-1">
+          <thead>
             <tr>
-              <td class="center">
-                <%= category.category_name %>
-              </td>
-              <td width="100">
-                <% if category.is_active == "Availble" %>
-                <%= "有効" %>
-                <% else %>
-                <%= "無効" %>
-                <% end %>
-              </td>
-              <td class="center">
-                <%= link_to "編集する", edit_user_category_path(@user.id, category.id), class: "btn btn-info btn-md" %>
-              </td>
+              <th>登録したカテゴリー</th>
+              <th></th>
+              <th></th>
             </tr>
-          <% end %>  
-        </tbody>
-      </table>]
+          </thead>
+          <tbody class="center">
+            <% @categories.each do |category| %>
+              <tr>
+                <td class="center">
+                  <%= category.category_name %>
+                </td>
+                <td width="100">
+                  <% if category.is_active == "Availble" %>
+                  <%= "有効" %>
+                  <% else %>
+                  <%= "無効" %>
+                  <% end %>
+                </td>
+                <td class="center">
+                  <%= link_to "編集する", edit_user_category_path(@user.id, category.id), class: "btn btn-info btn-md" %>
+                </td>
+              </tr>
+            <% end %>  
+          </tbody>
+        </table>
+      </div>
     </div>
   </div>
 </div>

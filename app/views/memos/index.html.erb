@@ -1,4 +1,5 @@
 <div class="container">
+  <%= render 'layouts/error_messages', model: @memo %>
   <% if flash[:notice] %>
     <div class="flash alert alert-danger">
       <%= flash[:notice] %>
@@ -18,22 +19,18 @@
         <p>メモはまだありません</p>
         <% else %>
           <%= @memos.each do |memo| %>
-            <!--<div class="row">-->
-            <!--  <div class="col-sm-6">-->
-                <div class="card">
-                  <div class="card-body">
-                    <h5 class="card-title"><%= memo.title %></h5>
-                    <p class="card-text"><%= memo.body %></p>
-                    <div class="d-inline p-2 bg-primary text-white">
-                      <%= link_to "go detail", memo_path(memo.id), class: "btn btn-primary" %>
-                    </div>
-                    <div class="d-inline p-2 bg-dark text-white">
-                      <%= link_to "go 相関図", memo_relation_memo_path(memo.id) %>
-                    </div>
-                  </div>
+            <div class="card">
+              <div class="card-body">
+                <h5 class="card-title"><%= memo.title %></h5>
+                <p class="card-text"><%= memo.body %></p>
+                <div class="d-inline p-2 bg-primary text-white">
+                  <%= link_to "go detail", memo_path(memo.id), class: "btn btn-primary" %>
                 </div>
-            <!--  </div>-->
-            <!--</div>-->
+                <div class="d-inline p-2 bg-dark text-white">
+                  <%= link_to "go 相関図", memo_relation_memo_path(memo.id) %>
+                </div>
+              </div>
+            </div>
           <% end %>
         <% end %>  
       </div>

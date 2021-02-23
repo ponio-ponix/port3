@@ -1,4 +1,5 @@
 <div class="container">
+  <%= render 'layouts/error_messages', model: @memo %>
   <% if flash[:notice] %>
     <div class="flash alert alert-danger">
       <%= flash[:notice] %>

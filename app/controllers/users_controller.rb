@@ -30,10 +30,11 @@ class UsersController < ApplicationController
       redirect_to user_path(@user.id)
     end
     if @user.update(user_params)
-      flash[:notice] = "successfully"
+      flash[:notice] = "編集しました"
       redirect_to user_path(current_user.id)
     else
       render "edit"
+      flash[:notice] = "編集に誤りがあります"
     end
     
   end
