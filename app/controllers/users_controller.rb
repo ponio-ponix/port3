@@ -8,8 +8,7 @@ class UsersController < ApplicationController
   
   def show
     @user = User.find(params[:id])
-    @memos = Memo.where(user_id: @user.id)
-    
+    @memos = Memo.where(user_id: @user.id).order(id: "DESC")
   end
   
   def edit

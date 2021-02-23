@@ -4,7 +4,7 @@ class MemosController < ApplicationController
   
   def index
     @user = User.find(params[:id])
-    @memos = Memo.find(@user[:id])
+    @memos = Memo.find(@user[:id]).order(id: "DESC") 
   end
   
   def show
