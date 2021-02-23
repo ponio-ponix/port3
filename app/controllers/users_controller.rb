@@ -8,7 +8,7 @@ class UsersController < ApplicationController
   
   def show
     @user = User.find(params[:id])
-    @memos = Memo.where(id: @user.id)
+    @memos = Memo.where(user_id: @user.id)
     
   end
   
@@ -20,7 +20,6 @@ class UsersController < ApplicationController
     end
     @categories = @user.categories
     @category = Category.new
-    
   end
   
   def update
