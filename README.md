@@ -1,5 +1,14 @@
 # README
 
+・簡易的なSNS形式メモ投稿webアプリです。
+
+インフラにAWSを用いています
+https://github.com/kyon-kyon/port3-git/blob/main/architect_all.jpg
+
+
+
+
+
 This README would normally document whatever steps are necessary to get the
 application up and running.
 
